@@ -3,16 +3,15 @@ param (
     [string]$location = "East US"
 )
 
-Write-Host "Logging into Azure..."
 Connect-AzAccount
 
-Write-Host "Creating resource group..."
+$securePassword = Read-Host -Prompt "Enter SQL Admin Password" -AsSecureString
+
 New-AzResourceGroup -Name $resourceGroupName -Location $location -ErrorAction SilentlyContinue
 
-Write-Host "Deploying Bicep template..."
 New-AzResourceGroupDeployment `
   -ResourceGroupName $resourceGroupName `
   -TemplateFile "main.bicep" `
-  -TemplateParameterFile "parameters.dev.json"
-
-Write-Host "Deployment completed."
+  -sqlAdminLogin "retailadmin" `
+  -sqlAdminPassword $securePassword `
+  -clientIp (Invoke-WebRequest -Uri "https://api.ipify.org").Content

@@ -1,54 +1,49 @@
 param location string = 'East US'
+param environment string = 'dev'
 param sqlAdminLogin string
 @secure()
 param sqlAdminPassword string
-
-param environment string = 'dev'
+param clientIp string
 
 var sqlServerName = 'sql-retail-${environment}'
 var sqlDbName = 'sqldb-retail-${environment}'
 var storageAccountName = 'stretail${environment}'
 var keyVaultName = 'kv-retail-${environment}'
+var synapseName = 'syn-retail-${environment}'
 
-resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: storageAccountName
-  location: location
-  sku: {
-    name: 'Standard_LRS'
-  }
-  kind: 'StorageV2'
-}
-
-resource sqlServer 'Microsoft.Sql/servers@2022-05-01-preview' = {
-  name: sqlServerName
-  location: location
-  properties: {
-    administratorLogin: sqlAdminLogin
-    administratorLoginPassword: sqlAdminPassword
-    version: '12.0'
+module storage './modules/storage.bicep' = {
+  name: 'storageModule'
+  params: {
+    location: location
+    storageAccountName: storageAccountName
   }
 }
 
-resource sqlDb 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
-  parent: sqlServer
-  name: sqlDbName
-  location: location
-  sku: {
-    name: 'Basic'
-    tier: 'Basic'
+module sql './modules/sql.bicep' = {
+  name: 'sqlModule'
+  params: {
+    location: location
+    sqlServerName: sqlServerName
+    sqlDbName: sqlDbName
+    sqlAdminLogin: sqlAdminLogin
+    sqlAdminPassword: sqlAdminPassword
+    clientIp: clientIp
   }
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
-  name: keyVaultName
-  location: location
-  properties: {
-    tenantId: subscription().tenantId
-    sku: {
-      name: 'standard'
-      family: 'A'
-    }
-    accessPolicies: []
-    enableSoftDelete: true
+module keyvault './modules/keyvault.bicep' = {
+  name: 'keyvaultModule'
+  params: {
+    location: location
+    keyVaultName: keyVaultName
+  }
+}
+
+module synapse './modules/synapse.bicep' = {
+  name: 'synapseModule'
+  params: {
+    location: location
+    synapseName: synapseName
+    storageAccountName: storageAccountName
   }
 }

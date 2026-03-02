@@ -7,6 +7,9 @@
     },
     "sqlAdminPassword": {
       "value": "ReplaceWithSecurePassword123!"
+    },
+    "clientIp": {
+      "value": "YOUR_PUBLIC_IP"
     }
   }
 }
