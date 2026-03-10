@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Azure
+*.bicepparam
+.azure/
+
+# VS Code
+.vscode/
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
