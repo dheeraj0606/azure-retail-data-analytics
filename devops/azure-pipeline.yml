@@ -1,0 +1,15 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- script: echo "Running infrastructure validation"
+  displayName: "Validate Bicep Templates"
+
+- script: echo "Running spark job validation"
+  displayName: "Validate Spark Scripts"
