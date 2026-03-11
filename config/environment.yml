@@ -1,0 +1,6 @@
+environment: dev
+region: eastus
+
+storage_account: stretaildev
+sql_server: sql-retail-dev
+synapse_workspace: syn-retail-dev
