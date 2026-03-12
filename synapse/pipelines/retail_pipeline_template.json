@@ -1,0 +1,17 @@
+{
+  "name": "RetailETLPipeline",
+  "activities": [
+    {
+      "name": "BronzeIngestion",
+      "type": "SynapseNotebook"
+    },
+    {
+      "name": "SilverTransformation",
+      "type": "SynapseNotebook"
+    },
+    {
+      "name": "GoldAggregation",
+      "type": "SynapseNotebook"
+    }
+  ]
+}
