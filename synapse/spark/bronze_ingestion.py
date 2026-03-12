@@ -1,7 +1,26 @@
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName("RetailBronze").getOrCreate()
+def run():
 
-df = spark.read.option("header",True).csv("/bronze/orders")
+    spark = SparkSession.builder \
+        .appName("RetailBronzeIngestion") \
+        .getOrCreate()
 
-df.show()
+    source_path = "abfss://bronze@stretaildev.dfs.core.windows.net/orders/orders.csv"
+    target_path = "abfss://bronze@stretaildev.dfs.core.windows.net/orders_delta"
+
+    df = spark.read \
+        .option("header", True) \
+        .csv(source_path)
+
+    print("Raw dataset preview")
+    df.show()
+
+    df.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .save(target_path)
+
+
+if __name__ == "__main__":
+    run()

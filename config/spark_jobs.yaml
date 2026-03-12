@@ -1,0 +1,13 @@
+jobs:
+
+  bronze_ingestion:
+    retries: 2
+    timeout_minutes: 30
+
+  silver_transformation:
+    retries: 2
+    timeout_minutes: 30
+
+  gold_aggregation:
+    retries: 1
+    timeout_minutes: 20
