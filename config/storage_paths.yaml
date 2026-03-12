@@ -1,0 +1,7 @@
+paths:
+
+  bronze: abfss://bronze@stretaildev.dfs.core.windows.net/
+
+  silver: abfss://silver@stretaildev.dfs.core.windows.net/
+
+  gold: abfss://gold@stretaildev.dfs.core.windows.net/
