@@ -1,0 +1,24 @@
+dataset: orders
+
+columns:
+
+  order_id:
+    type: integer
+    nullable: false
+
+  customer_id:
+    type: integer
+    nullable: false
+
+  product_id:
+    type: integer
+    nullable: false
+
+  quantity:
+    type: integer
+
+  price:
+    type: double
+
+  order_date:
+    type: datetime
