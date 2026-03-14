@@ -1,0 +1,15 @@
+platform:
+
+  name: retail-analytics-platform
+
+  environment: dev
+
+  cloud: azure
+
+  services:
+
+    storage: Azure Data Lake Gen2
+    compute: Synapse Spark
+    orchestration: Synapse Pipelines
+    warehouse: Synapse SQL
+    visualization: Power BI

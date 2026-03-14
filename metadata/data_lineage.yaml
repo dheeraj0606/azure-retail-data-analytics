@@ -1,0 +1,19 @@
+datasets:
+
+  orders_raw:
+    layer: bronze
+    source: csv_upload
+    downstream:
+      - orders_clean
+
+  orders_clean:
+    layer: silver
+    source: spark_transformation
+    downstream:
+      - product_sales
+
+  product_sales:
+    layer: gold
+    source: aggregation_job
+    downstream:
+      - powerbi_dashboard

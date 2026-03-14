@@ -1,0 +1,15 @@
+alerts:
+
+  pipeline_failure:
+
+    severity: high
+    notify: data-team@company.com
+
+  data_quality_failure:
+
+    severity: medium
+    notify: data-engineering@company.com
+
+  job_runtime_exceeded:
+
+    threshold_minutes: 30
