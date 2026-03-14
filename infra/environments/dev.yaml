@@ -1,0 +1,11 @@
+environment: dev
+
+resources:
+
+  resource_group: rg-retail-analytics-dev
+
+  storage_account: stretaildev
+
+  synapse_workspace: syn-retail-dev
+
+  sql_server: sql-retail-dev
