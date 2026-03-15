@@ -1,0 +1,17 @@
+tables:
+
+  - customers
+  - products
+  - orders
+  - payments
+  - shipments
+  - inventory
+  - stores
+  - suppliers
+  - reviews
+  - promotions
+  - campaigns
+  - loyalty_programs
+  - returns
+  - refunds
+  - warehouses
