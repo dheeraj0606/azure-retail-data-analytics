@@ -1,26 +1,12 @@
-from pyspark.sql import SparkSession
+from time_utils import current_timestamp
+from metrics_collector import collect_metrics
+from logger import get_logger
 
-def run():
+logger = get_logger("bronze_ingestion")
 
-    spark = SparkSession.builder \
-        .appName("RetailBronzeIngestion") \
-        .getOrCreate()
+logger.info(f"Bronze ingestion started at {current_timestamp()}")
 
-    source_path = "abfss://bronze@stretaildev.dfs.core.windows.net/orders/orders.csv"
-    target_path = "abfss://bronze@stretaildev.dfs.core.windows.net/orders_delta"
+# after dataframe load
+collect_metrics(df, "bronze_orders")
 
-    df = spark.read \
-        .option("header", True) \
-        .csv(source_path)
-
-    print("Raw dataset preview")
-    df.show()
-
-    df.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .save(target_path)
-
-
-if __name__ == "__main__":
-    run()
+logger.info(f"Bronze ingestion completed at {current_timestamp()}")
