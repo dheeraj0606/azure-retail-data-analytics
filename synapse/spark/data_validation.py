@@ -1,16 +1,11 @@
-from pyspark.sql.functions import col
+def validate_non_negative(df, column_name: str):
+    """
+    Ensures no negative values in numeric columns.
+    """
 
-def validate_orders(df):
+    invalid_count = df.filter(f"{column_name} < 0").count()
 
-    errors = []
+    if invalid_count > 0:
+        raise ValueError(f"{column_name} has negative values: {invalid_count}")
 
-    if df.filter(col("order_id").isNull()).count() > 0:
-        errors.append("Null order_id detected")
-
-    if df.filter(col("quantity") <= 0).count() > 0:
-        errors.append("Invalid quantity values detected")
-
-    if errors:
-        raise Exception("Data validation failed: " + ",".join(errors))
-
-    print("Data validation passed")
+    print(f"{column_name} validation passed")
