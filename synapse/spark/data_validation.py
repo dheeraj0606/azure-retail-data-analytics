@@ -1,11 +1,11 @@
-def validate_non_negative(df, column_name: str):
+def validate_not_null(df, column_name: str):
     """
-    Ensures no negative values in numeric columns.
+    Ensures column does not contain null values.
     """
 
-    invalid_count = df.filter(f"{column_name} < 0").count()
+    null_count = df.filter(f"{column_name} IS NULL").count()
 
-    if invalid_count > 0:
-        raise ValueError(f"{column_name} has negative values: {invalid_count}")
+    if null_count > 0:
+        raise ValueError(f"{column_name} contains null values: {null_count}")
 
-    print(f"{column_name} validation passed")
+    print(f"{column_name} null check passed")
