@@ -1,0 +1,6 @@
+app:
+  name: retail-analytics
+
+environment:
+  name: dev
+  region: eastus
