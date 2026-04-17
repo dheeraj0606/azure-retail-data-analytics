@@ -1,0 +1,17 @@
+{
+  "name": "RetailPipeline",
+  "activities": [
+    {
+      "name": "BronzeIngestion",
+      "type": "SparkJob"
+    },
+    {
+      "name": "SilverTransformation",
+      "type": "SparkJob"
+    },
+    {
+      "name": "GoldAggregation",
+      "type": "SparkJob"
+    }
+  ]
+}
