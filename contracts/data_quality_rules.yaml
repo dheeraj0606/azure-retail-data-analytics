@@ -1,0 +1,8 @@
+rules:
+  - name: not_null_order_id
+    column: order_id
+    rule: not_null
+
+  - name: positive_price
+    column: price
+    rule: greater_than_zero
