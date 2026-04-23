@@ -1,0 +1,7 @@
+{
+  "table": "orders",
+  "columns": [
+    {"name": "order_id", "type": "int"},
+    {"name": "price", "type": "double"}
+  ]
+}
