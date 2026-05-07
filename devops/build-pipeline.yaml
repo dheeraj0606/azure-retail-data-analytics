@@ -1,0 +1,19 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - checkout: self
+
+  - script: echo "Installing dependencies"
+    displayName: Install Dependencies
+
+  - script: |
+      chmod +x scripts/run_pipeline.sh
+      ./scripts/run_pipeline.sh
+    displayName: Run Data Pipeline
+
+  - script: echo "Build completed"
+    displayName: Finish Build
