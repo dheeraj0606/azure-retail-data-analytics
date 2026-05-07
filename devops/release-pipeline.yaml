@@ -1,0 +1,19 @@
+trigger:
+  - main
+
+stages:
+- stage: Deploy
+  jobs:
+  - job: DeployFabric
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - checkout: self
+
+      - powershell: |
+          ./powershell/deploy_fabric.ps1
+        displayName: Deploy Fabric
+
+      - powershell: |
+          ./powershell/deploy_powerbi.ps1
+        displayName: Deploy Power BI
