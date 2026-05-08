@@ -1,0 +1,17 @@
+trigger:
+  - main
+
+stages:
+- stage: Dev
+  jobs:
+  - job: DeployDev
+    steps:
+      - script: echo "Deploying to DEV environment"
+
+- stage: Prod
+  dependsOn: Dev
+  condition: succeeded()
+  jobs:
+  - job: DeployProd
+    steps:
+      - script: echo "Deploying to PROD environment"
