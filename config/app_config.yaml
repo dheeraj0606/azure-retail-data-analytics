@@ -1,6 +1,13 @@
-app:
-  name: retail-analytics
+environment: dev
 
-environment:
-  name: dev
-  region: eastus
+storage:
+  type: s3
+  bucket: retail-data-lake
+
+database:
+  type: snowflake
+  schema: analytics
+
+pipeline:
+  batch_size: 10000
+  retry_count: 3
