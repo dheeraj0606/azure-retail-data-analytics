@@ -1,0 +1,45 @@
+{
+  "name": "IngestOracleToADLS",
+  "properties": {
+    "activities": [
+      {
+        "name": "CopyFromOracleToADLS",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "7.00:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 30
+        },
+        "typeProperties": {
+          "source": {
+            "type": "OracleSource",
+            "query": "SELECT * FROM ORDERS WHERE LAST_UPDATED > SYSDATE - 1"
+          },
+          "sink": {
+            "type": "DelimitedTextSink",
+            "storeSettings": {
+              "type": "AzureBlobFSWriteSettings"
+            },
+            "formatSettings": {
+              "type": "DelimitedTextWriteSettings",
+              "fileExtension": ".csv"
+            }
+          }
+        },
+        "inputs": [
+          {
+            "referenceName": "OracleDataset",
+            "type": "DatasetReference"
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "ADLSRawDataset",
+            "type": "DatasetReference"
+          }
+        ]
+      }
+    ]
+  }
+}
