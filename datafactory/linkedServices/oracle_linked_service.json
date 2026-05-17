@@ -1,0 +1,14 @@
+{
+  "name": "OracleLinkedService",
+  "properties": {
+    "type": "Oracle",
+    "typeProperties": {
+      "connectionString": "Host=oracle-host;Port=1521;ServiceName=ORCL;",
+      "username": "user",
+      "password": {
+        "type": "SecureString",
+        "value": "******"
+      }
+    }
+  }
+}
