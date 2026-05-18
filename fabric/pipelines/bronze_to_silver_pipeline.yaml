@@ -1,0 +1,23 @@
+pipeline:
+  name: bronze_to_silver_pipeline
+  description: Transform raw data into cleaned silver layer
+
+activities:
+  - name: read_bronze_data
+    type: lakehouse_read
+    config:
+      source_table: bronze.orders
+
+  - name: clean_data
+    type: notebook
+    config:
+      notebook_path: /notebooks/clean_orders
+      parameters:
+        drop_nulls: true
+        deduplicate: true
+
+  - name: write_silver_data
+    type: lakehouse_write
+    config:
+      target_table: silver.orders
+      mode: overwrite
