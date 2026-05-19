@@ -1,0 +1,10 @@
+notebook:
+  name: clean_orders
+
+parameters:
+  drop_nulls: true
+  deduplicate: true
+
+output:
+  format: delta
+  mode: overwrite
