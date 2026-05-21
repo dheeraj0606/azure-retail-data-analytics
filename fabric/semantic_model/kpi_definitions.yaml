@@ -1,0 +1,32 @@
+version: 1
+
+model:
+  name: retail_kpi_model
+  description: KPI layer for retail analytics dashboard
+
+tables:
+  - name: orders
+    source: silver.orders
+
+measures:
+  - name: total_revenue
+    expression: SUM(orders.amount)
+
+  - name: total_orders
+    expression: COUNT(orders.order_id)
+
+  - name: avg_order_value
+    expression: DIVIDE(SUM(orders.amount), COUNT(orders.order_id))
+
+  - name: revenue_last_7_days
+    expression: CALCULATE(
+                  SUM(orders.amount),
+                  DATESINPERIOD(orders.order_date, TODAY(), -7, DAY)
+                )
+
+dimensions:
+  - name: region
+    column: orders.region
+
+  - name: order_date
+    column: orders.order_date

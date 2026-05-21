@@ -1,0 +1,29 @@
+dashboard:
+  name: Retail KPI Dashboard
+
+tiles:
+  - type: card
+    title: Total Revenue
+    measure: total_revenue
+
+  - type: card
+    title: Total Orders
+    measure: total_orders
+
+  - type: card
+    title: Avg Order Value
+    measure: avg_order_value
+
+  - type: line_chart
+    title: Revenue Trend
+    x_axis: order_date
+    y_axis: total_revenue
+
+  - type: bar_chart
+    title: Revenue by Region
+    x_axis: region
+    y_axis: total_revenue
+
+filters:
+  - field: region
+  - field: order_date
