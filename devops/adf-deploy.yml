@@ -1,0 +1,24 @@
+name: Deploy ADF Pipelines
+
+on:
+  push:
+    paths:
+      - datafactory/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy ADF
+        run: |
+          echo "Deploying ADF pipelines..."
+          # az datafactory pipeline create/update commands here
