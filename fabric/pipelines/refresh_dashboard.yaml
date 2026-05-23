@@ -1,0 +1,14 @@
+pipeline:
+  name: refresh_powerbi_dashboard
+
+steps:
+  - name: refresh_dataset
+    type: powerbi_refresh
+    config:
+      dataset: RetailAnalyticsDataset
+      workspace: RetailWorkspace
+
+  - name: validate_refresh
+    type: check_status
+    config:
+      expected_status: success
