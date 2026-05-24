@@ -1,0 +1,20 @@
+name: Deploy Power BI Dashboard
+
+on:
+  push:
+    paths:
+      - powerbi/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy Dataset
+        run: echo "Deploying Power BI dataset..."
+
+      - name: Deploy Dashboard
+        run: echo "Deploying dashboard..."
