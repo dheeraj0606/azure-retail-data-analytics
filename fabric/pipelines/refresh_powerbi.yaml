@@ -1,0 +1,14 @@
+pipeline:
+  name: refresh_powerbi_dataset
+
+activities:
+  - name: trigger_dataset_refresh
+    type: powerbi_refresh
+    config:
+      dataset: RetailAnalyticsModel
+      workspace: retail-analytics
+
+  - name: notify_completion
+    type: notification
+    config:
+      message: "Power BI dataset refreshed successfully"
