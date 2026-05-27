@@ -1,0 +1,12 @@
+connection:
+  source: fabric_lakehouse
+  target: powerbi_dataset
+
+config:
+  workspace: retail-analytics
+  lakehouse: retail_lakehouse
+  dataset: RetailAnalyticsModel
+
+refresh:
+  schedule: daily
+  time: "02:00"
