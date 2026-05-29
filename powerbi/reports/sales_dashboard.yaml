@@ -1,0 +1,32 @@
+report:
+  name: sales_dashboard
+  dataset: RetailAnalyticsModel
+
+pages:
+  - name: overview
+    visuals:
+      - type: card
+        title: Total Revenue
+        measure: Total Revenue
+
+      - type: card
+        title: Total Orders
+        measure: Total Orders
+
+      - type: line_chart
+        title: Revenue Trend
+        x_axis: order_date
+        y_axis: Total Revenue
+
+  - name: regional_analysis
+    visuals:
+      - type: bar_chart
+        title: Revenue by Region
+        category: region
+        value: Total Revenue
+
+      - type: table
+        columns:
+          - region
+          - Total Revenue
+          - Total Orders
