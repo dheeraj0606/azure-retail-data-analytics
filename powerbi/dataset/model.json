@@ -1,0 +1,29 @@
+{
+  "name": "RetailAnalyticsModel",
+  "tables": [
+    {
+      "name": "orders",
+      "columns": [
+        {"name": "order_id", "dataType": "string"},
+        {"name": "customer_id", "dataType": "string"},
+        {"name": "order_date", "dataType": "dateTime"},
+        {"name": "amount", "dataType": "double"},
+        {"name": "region", "dataType": "string"}
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "name": "Total Revenue",
+      "expression": "SUM(orders[amount])"
+    },
+    {
+      "name": "Total Orders",
+      "expression": "DISTINCTCOUNT(orders[order_id])"
+    },
+    {
+      "name": "Avg Order Value",
+      "expression": "DIVIDE(SUM(orders[amount]), DISTINCTCOUNT(orders[order_id]))"
+    }
+  ]
+}
