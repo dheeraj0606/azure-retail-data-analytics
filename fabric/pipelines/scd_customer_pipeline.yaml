@@ -1,0 +1,18 @@
+pipeline:
+  name: scd_customer_pipeline
+
+activities:
+  - name: load_staging
+    type: lakehouse_read
+    config:
+      source_table: bronze.customer
+
+  - name: apply_scd_type2
+    type: notebook
+    config:
+      notebook_path: /notebooks/scd_type2_customer
+
+  - name: write_dimension
+    type: lakehouse_write
+    config:
+      target_table: dim_customer
