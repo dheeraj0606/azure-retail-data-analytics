@@ -1,0 +1,24 @@
+# File: pipelines/dim_customer_pipeline.yaml
+
+name: dim_customer_pipeline
+
+activities:
+  - name: extract_customer_data
+    type: Copy
+    source:
+      type: SqlSource
+      query: "SELECT * FROM source_customer"
+    sink:
+      type: LakehouseSink
+      table: staging_customer
+
+  - name: run_scd_merge
+    type: Notebook
+    notebook: scd_loader
+    dependsOn:
+      - extract_customer_data
+
+  - name: optimize_table
+    type: SqlScript
+    script: |
+      OPTIMIZE dim_customer ZORDER BY (CustomerID);
