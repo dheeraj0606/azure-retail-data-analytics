@@ -1,0 +1,15 @@
+// File: powerbi/kpi_model.json
+
+{
+  "dataset": "CustomerAnalytics",
+  "measures": [
+    {
+      "name": "Active Customers",
+      "expression": "CALCULATE(COUNT(DimCustomer[CustomerID]), DimCustomer[IsCurrent] = 1)"
+    },
+    {
+      "name": "Churned Customers",
+      "expression": "CALCULATE(COUNT(DimCustomer[CustomerID]), DimCustomer[IsCurrent] = 0)"
+    }
+  ]
+}
