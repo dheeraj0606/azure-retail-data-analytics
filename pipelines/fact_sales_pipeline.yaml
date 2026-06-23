@@ -1,0 +1,25 @@
+# File: pipelines/fact_sales_pipeline.yaml
+
+name: fact_sales_pipeline
+
+activities:
+  - name: load_staging_sales
+    type: Copy
+    source:
+      type: SqlSource
+      query: "SELECT * FROM source_sales"
+    sink:
+      type: LakehouseSink
+      table: staging_sales
+
+  - name: transform_fact_sales
+    type: Notebook
+    notebook: fact_sales_loader
+    dependsOn:
+      - load_staging_sales
+
+  - name: load_fact_table
+    type: SqlScript
+    script: |
+      INSERT INTO FactSales
+      SELECT * FROM staging_fact_sales;
